@@ -77,7 +77,7 @@ export class FormDetailComponent implements OnInit{
     }
 
     onCancel() {
-      this.router.navigate([''])
+     window.history.back();
     }
 
   
