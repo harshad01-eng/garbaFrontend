@@ -1,0 +1,127 @@
+<div class="container ">
+    <h2 style="text-align: center;">Registration Form</h2>
+    
+    <form [formGroup]="form" (ngSubmit)="formSubmit()">
+        <div class="row">
+        <div class="form-group col-md-6">
+            <label>First Name</label>
+            <input [class.is-invalid]="form.get('firstName')?.invalid && form.get('firstName')?.touched" type="text" id="firstName" formControlName="firstName" class="form-control">
+            <div *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched" class="text-danger" >
+                first name is required
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+                <label>Last Name</label>
+                <input  [class.is-invalid]="form.get('lastName')?.invalid && form.get('lastName')?.touched" type="text" class="form-control" formControlName="lastName">
+                <div *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched" class="text-danger" >
+                    last name is required
+                </div>
+            </div>
+          <!-- <div class="form-group col-md-6">
+            <label>Last Name</label>
+            <input type="text" formControlName="userName" class="form-control">  
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>Mobile No</label>
+            <input [class.is-invalid]="form.get('mobileNo')?.invalid && form.get('mobileNo')?.touched" type="tel" class="form-control" id="mobileNo" formControlName="mobileNo">
+            <div *ngIf="form.get('mobileNo')?.invalid && form.get('mobileNo')?.touched" class="text-danger">
+                mobile number is required
+              </div>
+              <div *ngIf="form.get('mobileNo')?.errors?.['pattern']" class="text-danger">
+                Enter a valid mobile number (only digits allowed).
+              </div>
+              <div *ngIf="form.get('mobileNo')?.errors?.['minlength']" class="text-danger">
+                Mobile number must be at least 10 digits long.
+              </div>
+              <div *ngIf="form.get('mobileNo')?.errors?.['maxlength']" class="text-danger">
+                Mobile number must be exactly 10 digits long.</div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="batchTime">Select Batch Time</label>
+            <select [class.is-invalid]="form.get('batchTime')?.invalid && form.get('batchTime')?.touched" id="batchTime" class="form-select" formControlName="batchTime">
+                <option value="" disabled selected>Select batch</option>
+                <option value="1PM-3PM">1PM - 3PM</option>
+                <option value="3PM-5PM">3PM - 5PM</option>
+                <option value="5PM-7PM">5PM - 7PM</option>
+                <option value="7PM-9PM">7PM - 9PM</option>
+            </select>
+            <div *ngIf="form.get('batchTime')?.invalid && form.get('batchTime')?.touched" class="text-danger">
+                Batch time is required.
+              </div>
+        </div>
+       
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+           
+            <label>Gender</label>
+            <div style="display: flex; gap: 2%;">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="male" formControlName="gender" value="Male">
+                <label class="form-check-label" for="male">Male</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="female" formControlName="gender" value="Female">
+                <label class="form-check-label" for="female">Female</label>
+            </div>
+        </div>
+       
+        </div>
+        <div class="form-group col-md-6">
+            <label for="age">Age</label>
+            <select style="width: 50%;" id="age" [class.is-invalid]="form.get('age')?.invalid && form.get('age')?.touched"
+                class="form-select" formControlName="age">
+                <option value="" disabled selected>Choose your age</option>
+                <option *ngFor="let age of ageOptions" [value]="age">{{age}}</option>
+            </select>
+            <div *ngIf="form.get('age')?.invalid && form.get('age')?.touched" class="text-danger">
+                Age is required.
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    <div class="form-group col-md-6">
+        <label for="address">Address</label>
+  <textarea class="form-control" id="address" rows="3" formControlName="address"></textarea>
+    </div>
+    <div *ngIf="isAdmin" class="form-group col-md-6">
+        <label for="payment">Select Payment</label>
+        <select style="width: 50%;" [class.is-invalid]="form.get('payment')?.invalid && form.get('payment')?.touched" id="payment" class="form-select" formControlName="payment">
+            <option value="" disabled selected>Select batch</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="300">300</option>
+            <option value="400">400</option>
+            <option value="500">500</option>
+            <option value="600">600</option>
+            <option value="paid">PAID</option>
+        </select>
+        <div *ngIf="form.get('payment')?.invalid && form.get('payment')?.touched" class="text-danger">
+            Payment is required.
+          </div>
+    </div>
+    </div>
+    <div *ngIf="showError" class="text-danger">{{errorMessage}}</div>
+       
+        
+   
+
+    <div class="d-flex justify-content-end mt-5">
+        <button type="button" class="btn btn-secondary" style="margin-right: 10px;" (click)="clickCancel()">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+      </div>
+    
+    </form>
+
+   
+
+
+</div>
+
+ <!-- <div class="d-flex justify-content-end mt-3" style="margin-top: auto;">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div> -->
+
+<!-- [class.is-invalid]="form.get('age')?.invalid && form.get('age')?.touched" -->

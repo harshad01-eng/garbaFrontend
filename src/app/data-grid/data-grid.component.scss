@@ -1,0 +1,109 @@
+
+.grid-card-container {
+    display: flex;
+    justify-content: center;  /* Centers horizontally */
+    align-items: center;      /* Centers vertically */
+    height: 100vh;            /* Full viewport height to ensure vertical centering */
+    background-color:aliceblue;
+
+  }
+  
+  .grid-card {
+    width: 95%;
+    height: 90vh;
+    background-color: rgb(250, 237, 237);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(41, 40, 40, 0.1);  /* Add this line for shadow */
+  }   
+
+  .bottom-right-button {
+    position: absolute;
+    bottom: 10px;  /* Distance from the bottom */
+    right: 10px;   /* Distance from the right */
+    padding: 5px 20px;
+    background-color: #eb61c1;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    &:hover {
+      filter: brightness(0.7) ;
+    }
+  }
+  .bottom-right-button.logout {
+    background-color: #2577cf;
+  }
+  .bottom-right-button.export {
+    background-color: #3c8535;
+  }
+
+  .input-container {
+    position: relative;
+    margin-bottom: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column
+  }
+  
+  .input-container input {
+    margin: 32px 0 10px 0;
+    width: 20%;
+    padding: 12px;
+    border: 2px solid #951906;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fbefeff8;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    
+  }
+
+  .input-container input:focus {
+    background-color: #0a2428; /* Light background color on focus */
+    border-color: #2577cf;
+    box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.2);
+    outline: none;
+    color: #ccc;
+  }
+
+  .detail-button {
+    padding: 8px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #62a940;
+    border: none;
+    // border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  //  border-color: #a37a7a;
+   
+  }
+  .detail-button:disabled{
+    background-color: #aae390;
+  }
+
+  .detail-button:not(:disabled):hover{
+    filter: brightness(0.7);
+  }
+
+  @media (max-width:768px) {
+    .detail-button {
+        font-size: 0.9em; /* Slightly smaller button text */
+        padding: 5px 15px; /* Adjust padding for smaller screens */
+        width: 30%;
+      }
+
+      .input-container input {
+        width: 60%;
+      }
+
+    }
+  
+
+
+ 

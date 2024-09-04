@@ -1,0 +1,69 @@
+<div class="page-container">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+<div class="input-container">
+
+    <input id="mobileNo" type="tel" placeholder="Enter your mobile number" (change)="checkMobileNo()"  id="mobileNo" formControlName="mobileNo" />
+    <div *ngIf="form.get('mobileNo')?.invalid && form.get('mobileNo')?.touched" class="text-danger">
+        mobile number is required
+    </div>
+    <div *ngIf="form.get('mobileNo')?.errors?.['pattern']" class="text-danger">
+        Enter a valid mobile number (only digits allowed).
+    </div>
+    <div *ngIf="form.get('mobileNo')?.errors?.['minlength']" class="text-danger">
+        Mobile number must be at least 10 digits long.
+    </div>
+    <div *ngIf="form.get('mobileNo')?.errors?.['maxlength']" class="text-danger">
+        Mobile number must be exactly 10 digits long.
+    </div>
+    <div *ngIf="errorMessage && form.get('mobileNo')?.value !== '' " class="text-danger" style="margin-bottom: 10px;">
+      {{errorMessage}}
+  </div>
+    <button type="submit" [disabled]="form.invalid"  class="detail-button">Get Details</button>
+
+</div>
+</form>
+<div *ngIf="showDetail"  class="black-background">
+    <div class="container" *ngFor=" let userDetails of userDetails">
+        <div class="row" style="padding-left: 10%;">
+          <div class="col-5"><strong>First Name:</strong></div>
+          <div class="col-7">{{userDetails.firstName}}</div>
+        </div>
+        <div class="row" style="padding-left: 10%;">
+          <div class="col-5"><strong>Last Name:</strong></div>
+          <div class="col-7">{{userDetails.lastName}}</div>
+        </div>
+        <div class="row" style="padding-left: 10%;">
+          <div class="col-5"><strong>Mobile Number:</strong></div>
+          <div class="col-7">{{userDetails.mobileNo}}</div>
+        </div>
+        <div class="row" style="padding-left: 10%;">
+          <div class="col-5"><strong>Age:</strong></div>
+          <div class="col-7">{{userDetails.age}}</div>
+        </div>
+       
+        <div class="row" style="padding-left: 10%;">
+          <div class="col-5"><strong>Gender:</strong></div>
+          <div class="col-7">{{userDetails.gender}}</div>
+        </div>
+        <div class="row" style="padding-left: 10%;">
+          <div class="col-5"><strong>Batch Time:</strong></div>
+          <div class="col-7">{{userDetails.batchTime}}</div>
+        </div>
+        <div class="row" style="padding-left: 10%;">
+          <div class="col-5"><strong>Address:</strong></div>
+          <div class="col-7">{{userDetails.address}}</div>
+        </div>
+        <div class="row" style="padding-left: 10%;">
+          <div class="col-5"><strong>Registration No:</strong></div>
+          <div class="col-7">{{userDetails.regsNo}}</div>
+        </div>
+        <div class="row" style="padding-left: 10%;">
+          <div class="col-5"><strong>Status</strong></div>
+          <div *ngIf="userDetails.payment === 'paid'" class="col-7"><button type="button" class="status-button active">Active</button></div>
+          <div *ngIf="!(userDetails.payment === 'paid')" class="col-7"><button class="status-button pending">Pending</button> <div class="text-danger">please pay fees at admin</div></div>
+        </div>
+      </div>
+    <button class="btn btn-secondary cancel-button" (click)="onCancel()">Back</button>
+    
+</div>
+</div>

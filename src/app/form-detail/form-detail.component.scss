@@ -1,0 +1,167 @@
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    // align-items: center;
+    background-color: aliceblue;
+  }
+
+//   .form-container {
+//     flex: 0 1 auto;
+//     // padding: 20px;
+//   }
+  
+  /* The black background takes up the remaining height */
+  
+.input-container {
+    position: relative;
+    margin-bottom: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column
+  }
+  
+  .input-container label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .input-container input {
+    margin: 32px 0 10px 0;
+    width: 30%;
+    padding: 12px;
+    border: 2px solid #9aa3a2;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #ffffff;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    
+  }
+  
+  .input-container input:focus {
+    background-color: #252627; /* Light background color on focus */
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.2);
+    outline: none;
+    color: #ccc;
+  }
+  
+  .input-container input::placeholder {
+    color: #888;
+  }
+  
+  .detail-button {
+    padding: 8px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #a469e7;
+    border: none;
+    // border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  //  border-color: #a37a7a;
+   
+  }
+
+  .status-button {
+    padding: 4px 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+    // background-color: #48bd0d;
+    border: none;
+  }
+
+  .status-button.pending {
+    background-color: #e90000;
+  }
+  .status-button.active {
+    background-color: #71ec38;
+  }
+
+  .detail-button:disabled{
+    background-color: #c1aadb;
+    cursor: not-allowed;
+  }
+
+  .detail-button:not(:disabled):hover{
+    filter: brightness(0.7);
+  }
+
+  .black-background {
+    flex: 1; /* Grow to fill the remaining space */
+    background-color: rgb(15, 14, 14);
+    color: white;
+    width: 50%;
+    margin-bottom: 10px;
+    margin-left: 25%;
+    
+    position: relative;
+   
+    box-shadow: 0 10px 30px rgba(19, 18, 18, 0.1);
+    border-radius: 15px;
+    
+  }
+
+  .cancel-button {
+    position: absolute;
+    bottom: 20px; /* Space from the bottom */
+    right: 20px; /* Space from the right */
+    padding: 10px 20px;
+    // background-color: #ff4d4d; /* Red background for visibility */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .cancel-button:hover {
+    background-color: #2f3635; /* Darker red on hover */
+  }
+
+  .container {
+    padding-top: 10px;
+    // max-width: 600px; /* Optional: Set max width for better readability */
+    margin: auto; /* Center horizontally */
+    float: left;
+      }
+  
+  .row {
+    margin-bottom: 10px;
+    padding-left: 20%;
+  }
+  
+  .col-4 {
+    font-weight: bold;
+  }
+
+  @media (max-width:768px) {
+    .detail-button {
+        font-size: 0.9em; /* Slightly smaller button text */
+        padding: 5px 15px; /* Adjust padding for smaller screens */
+        width: 30%;
+      }
+
+      .input-container input {
+        width: 60%;
+      }
+
+      .black-background {
+        margin-left: 5%;
+        width: 90%;
+        padding: none;
+        font-size: 0.9rem;
+      }
+
+      .cancel-button {
+        padding: 5px 15px;
+      }
+      .status-button {
+        font-size: 0.9rem;
+      }
+  }

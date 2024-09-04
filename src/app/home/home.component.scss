@@ -1,0 +1,230 @@
+.wallpaper-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+ 
+  
+.wallpaper-slideshow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    background-position: center;
+    animation: slide 25s infinite;   
+  }
+  
+  @keyframes slide {
+    0% { background-image: url('/assets/garbaImg3.jpg'); }
+    20% { background-image: url('/assets/garbaImg3.jpg'); }
+    33% { background-image: url('/assets/garbaImg2.jpg'); }
+    45% { background-image: url('/assets/garbaImg2.jpg'); }
+    50% { background-image: url('/assets/garbaImg2.jpg'); }
+    66% { background-image: url('/assets/garbaImg5.jpg'); }
+    75% { background-image: url('/assets/garbaImg5.jpg'); }
+    95% { background-image: url('/assets/garbaImg5.jpg'); }
+    100% { background-image: url('/assets/garbaImg3.jpg'); }
+  }
+
+
+
+@keyframes slideUp {
+    from {
+      transform: translateY(20px); /* Start from 20px below */
+      opacity: 0; /* Start with no opacity */
+    }
+    to {
+      transform: translateY(0); /* Move to its original position */
+      opacity: 1; /* End with full opacity */
+    }
+  }
+
+
+
+  .card-container {
+    position: relative;
+    z-index: 1; /* Ensures cards are above the background */
+    display: flex;
+    flex-direction: column;
+    gap: 20rem; /* Space between cards */
+    overflow-y: auto; /* Common scrollbar for the card container */
+    max-height: 100vh; /* Ensure it doesn't exceed the screen height */
+}
+
+.card {
+    background-color: rgba(0, 0, 0, 0.815); /* Faint black color */
+    color: white;
+    border-radius: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0; /* Prevents cards from shrinking if container height is smaller */
+    display: flex;
+    flex-direction: column;
+    padding: 0; /* Remove all padding */
+    align-items: center;
+    position: relative;
+}
+
+.card-small {
+  height: 40vh; /* Height for the first card */
+}
+
+.card-large {
+  height: 60vh; /* Height for the second card */
+}
+
+.card-title {
+  margin: 0; /* Remove all margins */
+  padding: 0.5rem 1rem; /* Minimal padding to keep title close to the top */
+  font-size: 4rem; /* Adjust font size as needed */
+  color: white; /* Title color */
+  animation: slideUp 4s ease-out; /* Apply the slide-up animation */
+  text-align: center;
+  text-shadow: 0px 0px 10px gold, 0px 0px 20px gold, 0px 0px 30px gold, 0px 0px 40px gold;
+  letter-spacing: 10px;
+  position: relative;
+  overflow: hidden; /* Hide overflow to allow for animation effects */
+}
+
+.card-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #f1f1f1;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-out; /* Animate scaling */
+}
+
+.card-title:hover::after {
+  transform: translateX(0);
+ 
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center the buttons */
+  gap: 20px; /* Space between buttons */
+  position: absolute;
+  bottom: 30px;
+  width: 100%; /* Ensure container spans full width for centered alignment */
+  padding: 0 20px; /* Optional: add some padding for spacing */
+}
+
+.card-button {
+  padding: 8px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  // background-color: #33cf25;
+  width: 10%;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+ 
+}
+
+.card-button.green {
+  background-color: #33cf25;
+}
+
+.card-button.purple {
+  background-color: #5e2bbc;
+}
+
+.card-button:hover {
+  filter: brightness(0.5);
+}
+
+@media (max-width: 768px) {
+  .scrollable-card {
+    padding: 0; /* Reduce padding on smaller screens */
+  }
+
+  .card-title {
+    font-size: 2em; /* Slightly smaller title font size */
+  }
+
+  .card-button {
+    font-size: 0.9em; /* Slightly smaller button text */
+    padding: 5px 15px; /* Adjust padding for smaller screens */
+    width: 30%;
+  }
+  .card-button {
+    font-size: 0.9em; /* Slightly smaller button text */
+    padding: 5px 15px; /* Adjust padding for smaller screens */
+    width: 30%;
+  }
+  .card-container {
+    gap: 10rem;
+  }
+}
+
+.card-image {
+  width: 300px; /* Full width of the card */
+  height: 200px; /* Maintain aspect ratio */
+  margin-bottom: 15px; /* Space below the image */
+  border-radius: 8px; /* Optional rounded corners */
+  filter: brightness(1.5); /* Increase brightness */
+}
+
+.card-content {
+  // padding: 1rem; /* Padding for the content */
+  flex-grow: 1; /* Ensure content takes up the remaining space */
+  font-size: 1rem; /* Adjust font size as needed */
+}
+
+.card-content p {
+  display: inline-block;
+  overflow: hidden; /* Ensures text stays within bounds */
+  white-space: nowrap; /* Prevents text from wrapping */
+  // letter-spacing: 2px; /* Adjust spacing between letters */
+  opacity: 0; /* Start with text hidden */
+  animation: typing 2s steps(30, end) 2s forwards, delayOpacity 0s 2s forwards; /* Typing effect */
+  // border-right: 2px solid white; /* Optional cursor effect */
+}
+
+@keyframes typing {
+  from {
+      width: 0;
+  }
+  to {
+      width: 100%;
+  }
+}
+@keyframes delayOpacity{
+to{
+  opacity: 1;
+}
+}
+
+.carousel-item {
+  width: 100%;
+  text-align: center; /* Center the content horizontally */
+}
+
+#sponsorCarousel {
+  top: 10%;
+  position: relative; /* Positioning context for controls */
+  width: 100%; /* Ensure carousel takes full width of the card */
+  // height: 100%; /* Ensure carousel takes full height of the card */
+}
+
+.carousel-inner img {
+  border-radius: 8px;
+  width: auto; /* Prevent image from stretching */
+  max-width: 90%; /* Ensure image does not exceed the width of the container */
+  height: auto; /* Maintain aspect ratio */
+  margin: auto; /* Center the image within the carousel item */
+  max-height: 200px;
+}
+
+
+

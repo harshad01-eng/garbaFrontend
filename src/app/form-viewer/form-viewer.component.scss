@@ -1,0 +1,41 @@
+.form-group {
+    label {
+      font-weight: bold;
+      color: #333;
+    }
+    
+        margin-bottom: 1rem; /* Space between rows */
+    
+  
+    .text-danger {
+      margin-top: 0.25rem;
+      font-size: 0.875rem;
+    }
+}
+
+.form-buttons .row {
+    display: flex;
+    justify-content: space-between; /* Align buttons to edges */
+  }
+
+  .container {
+    background-color: aliceblue;
+    height: 100%;
+    max-width: 100%;
+    position: absolute;
+  }
+
+  @media (max-width:768px) {
+    .container {
+      // background-color: aliceblue;
+      max-height: 200%;
+      position: relative;
+    }
+  }
+
+  .btn-primary:hover{
+    filter: brightness(0.6);
+  }
+
+  
+

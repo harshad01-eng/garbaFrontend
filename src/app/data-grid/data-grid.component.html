@@ -1,0 +1,23 @@
+<div *ngIf="!showGrid" class="input-container">
+  <input type="password" [(ngModel)]="passWord" (change)="checkPassword()" id="userPassword" placeholder="Enter Password">
+  <div *ngIf="errorMessage && passWord !== '' " class="text-danger" style="margin-bottom: 10px;">
+    {{errorMessage}}
+</div>
+  <button type="button"   class="detail-button" [disabled]="passWord === ''" (click)="submit()">Submit</button>
+</div>
+<div *ngIf="showGrid" class="grid-card-container">
+    <div class="grid-card" *ngIf="isBrowser || isBrowser">
+        <ag-grid-angular
+        style="width: 97%; height: 90%; margin-top: 5px;"
+      class="ag-theme-alpine"
+        [rowData]="rowData"
+        [columnDefs]="colDefs" 
+        (gridReady)="onGridReady($event)"/>
+
+        <button type="button" class="bottom-right-button logout" (click)="logoutUser()" style=" margin-right: 170px;">Logout</button>
+        <button type="button" class="bottom-right-button export" (click)="exportExcel()" style=" margin-right: 80px;">Export</button>
+        <button type="button" class="bottom-right-button" (click)="back()">Back</button>
+    </div>
+  </div>
+
+ 
