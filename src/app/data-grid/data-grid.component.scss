@@ -91,6 +91,11 @@
     filter: brightness(0.7);
   }
 
+  .cell-green{
+    background-color: #62a940;
+    color: white;
+  }
+
   @media (max-width:768px) {
     .detail-button {
         font-size: 0.9em; /* Slightly smaller button text */

@@ -35,7 +35,8 @@ export class FormViewerComponent implements OnInit {
   })
 
 
-  constructor(private router: Router, private formService: FormService, private route: ActivatedRoute) {
+  constructor(private router: Router, private formService: FormService, 
+              private route: ActivatedRoute) {
     if (typeof localStorage !== 'undefined') {
       if( localStorage.getItem("userRole") !== undefined && localStorage.getItem("userRole") !== null ){
       this.isAdmin = localStorage.getItem("userRole");
@@ -69,7 +70,12 @@ export class FormViewerComponent implements OnInit {
     })
   }
   clickCancel() {
-    window.history.back()
+    if(!Number.isNaN(this.id)){
+      this.router.navigate(['admin'])
+    }else {
+      this.router.navigate([''])
+    }
+   
 
   }
   formSubmit() {
@@ -89,7 +95,11 @@ export class FormViewerComponent implements OnInit {
 
       this.formService.registerDetail(registDto).subscribe({
         next: (response) => {
-          this.router.navigate(['']); // Redirect after successful submission
+          if(!Number.isNaN(this.id)){
+            this.router.navigate(['admin'])
+          }else {
+            this.router.navigate([''])
+          }
         },
         error: (error) => {
           this.errorMessage = error.error;

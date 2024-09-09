@@ -77,7 +77,26 @@ export class FormDetailComponent implements OnInit{
     }
 
     onCancel() {
-     window.history.back();
+      if(!Number.isNaN(this.id)){
+        this.router.navigate(['admin'])
+      }else {
+        this.router.navigate([''])
+      }
+    }
+
+    getIdCard(){
+      if(this.userDetails.length > 0){
+        this.formService.downloadPdfById(this.userDetails[0].id).subscribe(res => {
+           const url = window.URL.createObjectURL(res);
+           const link = document.createElement('a');
+           link.href = url;
+           link.download = 'UDAAN I-CARD.pdf';
+           link.click()
+           window.URL.revokeObjectURL(url);
+         }, error => {
+           console.error('Error downloading the PDF:', error);
+         });
+       }
     }
 
   

@@ -42,10 +42,11 @@
             <label for="batchTime">Select Batch Time</label>
             <select [class.is-invalid]="form.get('batchTime')?.invalid && form.get('batchTime')?.touched" id="batchTime" class="form-select" formControlName="batchTime">
                 <option value="" disabled selected>Select batch</option>
-                <option value="1PM-3PM">1PM - 3PM</option>
-                <option value="3PM-5PM">3PM - 5PM</option>
-                <option value="5PM-7PM">5PM - 7PM</option>
-                <option value="7PM-9PM">7PM - 9PM</option>
+                <option value="1.30PM to 3.00PM">1.30PM to 3.00PM</option>
+                <option value="3.00PM to 4.30PM">3.00PM to 4.30PM</option>
+                <option value="4.30PM to 6.00PM">4.30PM to 6.00PM</option>
+                <option value="6.00PM to 7.30PM">6.00PM to 7.30PM</option>
+                <option value="7.30PM to 9.00PM">7.30PM to 9.00PM</option>
             </select>
             <div *ngIf="form.get('batchTime')?.invalid && form.get('batchTime')?.touched" class="text-danger">
                 Batch time is required.
@@ -89,7 +90,7 @@
     <div *ngIf="isAdmin" class="form-group col-md-6">
         <label for="payment">Select Payment</label>
         <select style="width: 50%;" [class.is-invalid]="form.get('payment')?.invalid && form.get('payment')?.touched" id="payment" class="form-select" formControlName="payment">
-            <option value="" disabled selected>Select batch</option>
+            <option value="" disabled selected>Select payment</option>
             <option value="100">100</option>
             <option value="200">200</option>
             <option value="300">300</option>
@@ -104,13 +105,14 @@
     </div>
     </div>
     <div *ngIf="showError" class="text-danger">{{errorMessage}}</div>
+    <div *ngIf="!isAdmin">Note: After submitting the form, you will need to pay ₹700 offline.</div>
        
         
    
 
     <div class="d-flex justify-content-end mt-5">
-        <button type="button" class="btn btn-secondary" style="margin-right: 10px;" (click)="clickCancel()">Cancel</button>
-        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+        <button type="submit" class="btn btn-primary" style="margin-right: 10px;" [disabled]="form.invalid">Submit</button>
+        <button type="button" class="btn btn-secondary"  (click)="clickCancel()">Cancel</button>
       </div>
     
     </form>

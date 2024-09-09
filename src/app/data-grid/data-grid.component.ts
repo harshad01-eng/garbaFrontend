@@ -60,7 +60,12 @@ export class DataGridComponent implements OnInit {
     { field: "age",flex:1  },
     { field: "gender",flex:1  },
     { field: "batchTime",flex:1 },
-    { field: "payment",flex:1 },
+    { field: "payment",flex:1, cellStyle: (params)=> {
+      if(params.value === 'paid'){
+        return {backgroundColor: '#B2FF66', color: 'white'}
+      }
+      return {backgroundColor: '#FCBCAF', color: 'white'}; 
+    }},
     {headerName:"Registration NO", field: "regsNo",flex:1,floatingFilter:true, filter:true },
     { field: "address",flex:2  },
     { headerName:"Actions", field: "actions",flex:1 , cellRenderer: this.actionCellRenderer.bind(this),sortable: false,
@@ -110,7 +115,6 @@ export class DataGridComponent implements OnInit {
     getData(){
       this.formService.getAllData().subscribe(res => {
         this.rowData = res
-        console.log("rowData",res)
       })
     }
 
@@ -126,8 +130,7 @@ export class DataGridComponent implements OnInit {
     }
 
     back(){
-     
-      this.router.navigate([''])
+        this.router.navigate([''])
     }
 
     onGridReady(event: GridReadyEvent<RegistDto,any>) {

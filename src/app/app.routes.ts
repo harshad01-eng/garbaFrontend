@@ -25,7 +25,8 @@ export const routes: Routes = [
     },
     {
         path:'view/:id',
-        component: FormDetailComponent
+        component: FormDetailComponent,
+        canActivate:[AccessGuard]
     },
     {
         path:'admin',

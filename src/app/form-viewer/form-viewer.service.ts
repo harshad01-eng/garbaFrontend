@@ -29,9 +29,7 @@ export class FormService {
         return this.http.get<RegistDto>(`${this.apiUrl}/edit/${id}`)
     }
 
-    private handleError(error: any) {
-        return throwError(() => error);
-      }
+   
 
     login(username:string, password:string){
         return this.http.post<any>(`${this.apiUrl}/login`,{username,password}).pipe(map((res : any)=> {
@@ -41,5 +39,13 @@ export class FormService {
 
     getAllData(): Observable<RegistDto[]> {
         return this.http.get<RegistDto[]>(`${this.apiUrl}/gridData`)
+    }
+
+    downloadPdfById(id: number) {
+        return this.http.get<Blob>(`${this.apiUrl}/getPdf/${id}`, { responseType : 'blob' as 'json'});
+    }
+
+    private handleError(error: any) {
+        return throwError(() => error);
     }
 }

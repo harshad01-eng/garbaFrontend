@@ -60,10 +60,17 @@
         <div class="row" style="padding-left: 10%;">
           <div class="col-5"><strong>Status</strong></div>
           <div *ngIf="userDetails.payment === 'paid'" class="col-7"><button type="button" class="status-button active">Active</button></div>
-          <div *ngIf="!(userDetails.payment === 'paid')" class="col-7"><button class="status-button pending">Pending</button> <div class="text-danger">please pay fees at admin</div></div>
+          <div *ngIf="!(userDetails.payment === 'paid')" class="col-7"><button class="status-button pending">Disable</button> <div class="text-danger">please pay fees at admin</div></div>
         </div>
       </div>
-    <button class="btn btn-secondary cancel-button" (click)="onCancel()">Back</button>
+      <div *ngIf="userDetails.length === 1" style="display: flex;">
+        <button class="btn  idCard"  (click)="getIdCard()">ID Card</button>
+      <button class="btn btn-secondary cancel-button" (click)="onCancel()">Back</button>
+      </div>
     
+</div>
+<div *ngIf="userDetails.length > 1" style="display: flex;">
+  <button class="btn  idCard"  (click)="getIdCard()">ID Card</button>
+<button class="btn btn-secondary cancel-button" (click)="onCancel()">Back</button>
 </div>
 </div>
