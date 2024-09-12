@@ -126,8 +126,8 @@
   display: flex;
   justify-content: center; /* Center the buttons */
   gap: 20px; /* Space between buttons */
-  position: absolute;
-  bottom: 30px;
+  position: relative;
+  bottom: 20px;
   width: 100%; /* Ensure container spans full width for centered alignment */
   padding: 0 20px; /* Optional: add some padding for spacing */
 }
@@ -257,6 +257,7 @@ to{
     width: 30%;
   }
   .card-large {
+    height: 50vh;
     margin-bottom: 10rem;
   }
   .card-contacts p {

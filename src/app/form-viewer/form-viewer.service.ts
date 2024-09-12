@@ -15,10 +15,10 @@ export class FormService {
 
     constructor(private http : HttpClient){}
 
-    registerDetail(registDto: RegistDto): Observable<RegistDto> {
+    registerDetail(registDto: FormData): Observable<any> {
         const url = this.apiUrl + '/register'
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        return this.http.post<RegistDto>(url, registDto, { headers }).pipe(catchError(this.handleError));
+        // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.post<RegistDto>(url, registDto).pipe(catchError(this.handleError));
     }
 
     getDetailByMobileNo(mobileNo: String) : Observable<RegistDto[]> {

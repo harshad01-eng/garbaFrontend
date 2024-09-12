@@ -9,5 +9,6 @@ export interface RegistDto {
   batchTime: string;
   address: string;
   regsNo: string;
-  payment:string
+  payment:string;
+  photo?: File
 }

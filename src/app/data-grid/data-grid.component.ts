@@ -139,7 +139,10 @@ export class DataGridComponent implements OnInit {
 
       exportExcel(){
         const rowData: any[] = [];
-        this.gridApi.forEachNode((node: any) => rowData.push(node.data));
+        this.gridApi.forEachNode((node: any) => {
+          const { photo, ...dataWithoutPhoto } = node.data;
+          rowData.push(dataWithoutPhoto);
+        });
     
         // Create a worksheet with the row data
         const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(rowData);

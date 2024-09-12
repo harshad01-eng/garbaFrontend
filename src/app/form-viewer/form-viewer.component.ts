@@ -19,6 +19,7 @@ export class FormViewerComponent implements OnInit {
   errorMessage: string | null = null;
   id:number|null=null;
   showError:boolean=false;
+  photoExist:boolean=false;
   ageOptions: number[] = Array.from({ length: 58 }, (_, i) => i + 3);
   form = new FormGroup({
     id: new FormControl<number | null>(null), // Include id
@@ -30,7 +31,8 @@ export class FormViewerComponent implements OnInit {
     gender: new FormControl(''),
     age: new FormControl<number | null>(null, [Validators.required]), 
     address: new FormControl(''),
-    payment: new FormControl('')
+    payment: new FormControl(''),
+    photo: new FormControl<File | null>(null, [Validators.required])
 
   })
 
@@ -46,6 +48,7 @@ export class FormViewerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   
     this.route.params.subscribe(params => {
       this.id = +params['id']
       if(!Number.isNaN(this.id)){
@@ -61,8 +64,15 @@ export class FormViewerComponent implements OnInit {
             gender: registDto.gender,
             age: registDto.age,
             address: registDto.address,
-            payment: registDto.payment
+            payment: registDto.payment,
           });
+          if(registDto.photo){
+            this.photoExist = true;
+            this.form.get('photo')?.setErrors(null)
+          }
+          
+
+         
           
         })
       }
@@ -80,7 +90,8 @@ export class FormViewerComponent implements OnInit {
   }
   formSubmit() {
     if (this.form.valid) {
-      const registDto: RegistDto = {
+      const formData = new FormData();
+      formData.append('registDto', new Blob([JSON.stringify({
         id: this.form.get('id')?.value ?? 0,
         regsNo: this.form.get('regsNo')?.value || '',
         firstName: this.form.get('firstName')?.value || '',
@@ -91,9 +102,16 @@ export class FormViewerComponent implements OnInit {
         age: Number(this.form.get('age')?.value) || 0,
         address: this.form.get('address')?.value || '',
         payment: this.form.get('payment')?.value || '',
-      };
+    })], { type: 'application/json' }));
 
-      this.formService.registerDetail(registDto).subscribe({
+    // Append the file (photo) if it exists
+    const photo = this.form.get('photo')?.value as File;
+    if (photo) {
+        formData.append('photo', photo);
+    }
+     
+
+      this.formService.registerDetail(formData).subscribe({
         next: (response) => {
           if(!Number.isNaN(this.id)){
             this.router.navigate(['admin'])
@@ -112,8 +130,48 @@ export class FormViewerComponent implements OnInit {
       // Optionally handle the case where the form is invalid
     }
   }
+  photoError: string | null = null;
 
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    const file = input.files[0];
+    if (file.type.startsWith('image/')) {
+      this.form.patchValue({ photo: file });
+      this.photoError = null;
+    } else {
+      this.photoError = 'Please select a valid image file.';
+    }
+  }
+  }
+  videoElement: any;
+  canvasElement: any;
+  context: any;
+  // startCamera() {
+  //   this.videoElement = document.querySelector('video');
+  //   this.canvasElement = document.querySelector('canvas');
+  //   this.context = this.canvasElement.getContext('2d');
 
+  //   // Access the camera using WebRTC
+  //   navigator.mediaDevices.getUserMedia({ video: true })
+  //     .then((stream) => {
+  //       this.videoElement.srcObject = stream;
+  //     })
+  //     .catch((err) => {
+  //       console.error('Error accessing the camera: ', err);
+  //     });
+  // }
 
-
+  // takePhoto() {
+  //   // Capture the current video frame
+  //   this.context.drawImage(this.videoElement, 0, 0, this.canvasElement.width, this.canvasElement.height);
+  //   const dataURL = this.canvasElement.toDataURL('image/png');
+  //   console.log('Photo captured:', dataURL);
+  //   // You can now upload or save the captured image (dataURL)
+  // }
 }
+
+
+
+
+
