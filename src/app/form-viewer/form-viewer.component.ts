@@ -20,6 +20,7 @@ export class FormViewerComponent implements OnInit {
   id:number|null=null;
   showError:boolean=false;
   photoExist:boolean=false;
+  photo: File | null = null;
   ageOptions: number[] = Array.from({ length: 58 }, (_, i) => i + 3);
   form = new FormGroup({
     id: new FormControl<number | null>(null), // Include id
@@ -32,7 +33,7 @@ export class FormViewerComponent implements OnInit {
     age: new FormControl<number | null>(null, [Validators.required]), 
     address: new FormControl(''),
     payment: new FormControl(''),
-    photo: new FormControl<File | null>(null, [Validators.required])
+    photo: new FormControl<File | null>(null)
 
   })
 
@@ -105,9 +106,9 @@ export class FormViewerComponent implements OnInit {
     })], { type: 'application/json' }));
 
     // Append the file (photo) if it exists
-    const photo = this.form.get('photo')?.value as File;
-    if (photo) {
-        formData.append('photo', photo);
+    // const photo = this.form.get('photo')?.value as File;
+    if (this.photo) {
+        formData.append('photo', this.photo);
     }
      
 
@@ -132,15 +133,19 @@ export class FormViewerComponent implements OnInit {
   }
   photoError: string | null = null;
 
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-  if (input.files && input.files.length > 0) {
-    const file = input.files[0];
+  onFileSelected(event: any): void {
+    const file = event.target.files[0]
+    if(file){
+    // const input = event.target as HTMLInputElement;
+  // if (input.files && input.files.length > 0) {
+    // const file = input.files[0];
     if (file.type.startsWith('image/')) {
-      this.form.patchValue({ photo: file });
+     this.photo = file
       this.photoError = null;
+      this.photoExist = true;
     } else {
       this.photoError = 'Please select a valid image file.';
+      this.photoExist = false;
     }
   }
   }

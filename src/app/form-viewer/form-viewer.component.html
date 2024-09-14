@@ -109,10 +109,10 @@
 <button (click)="takePhoto()">Capture Photo</button>
 <canvas id="canvas"></canvas> -->
         <label for="photo">Capture Photo</label>
-        <input  [class.is-invalid]="form.get('photo')?.invalid && form.get('photo')?.touched" type="file" id="photo"  class="form-control" formControlName="photo" accept="image/*" capture="user" (change)="onFileSelected($event)">
-        <div *ngIf="form.get('photo')?.invalid && form.get('photo')?.touched" class="text-danger">
+        <input   type="file" id="photo"  class="form-control"  accept="image/*" capture="user" (change)="onFileSelected($event)">
+        <!-- <div *ngIf="form.get('photo')?.invalid && form.get('photo')?.touched" class="text-danger">
             photo is required.
-          </div>
+          </div> -->
           <div *ngIf="photoExist">photo uploaded</div>
         <div *ngIf="photoError" class="text-danger">{{photoError}}</div>
     </div>
