@@ -4,11 +4,13 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { ActivatedRoute, Router } from '@angular/router';
 import { RegistDto } from '../app.form.model';
 import { FormService } from './form-viewer.service';
+import { NgxImageCompressService  } from 'ngx-image-compress';
 
 @Component({
   selector: 'app-form-viewer',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
+  providers:[NgxImageCompressService],
 
   templateUrl: './form-viewer.component.html',
   styleUrl: './form-viewer.component.scss'
@@ -20,6 +22,8 @@ export class FormViewerComponent implements OnInit {
   id:number|null=null;
   showError:boolean=false;
   photoExist:boolean=false;
+  isLoading: boolean = false;
+  showSuccessPopup: boolean = false;
   photo: File | null = null;
   ageOptions: number[] = Array.from({ length: 58 }, (_, i) => i + 3);
   form = new FormGroup({
@@ -39,7 +43,7 @@ export class FormViewerComponent implements OnInit {
 
 
   constructor(private router: Router, private formService: FormService, 
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private imageCompress: NgxImageCompressService) {
     if (typeof localStorage !== 'undefined') {
       if( localStorage.getItem("userRole") !== undefined && localStorage.getItem("userRole") !== null ){
       this.isAdmin = localStorage.getItem("userRole");
@@ -91,6 +95,7 @@ export class FormViewerComponent implements OnInit {
   }
   formSubmit() {
     if (this.form.valid) {
+      this.isLoading= true;
       const formData = new FormData();
       formData.append('registDto', new Blob([JSON.stringify({
         id: this.form.get('id')?.value ?? 0,
@@ -114,10 +119,12 @@ export class FormViewerComponent implements OnInit {
 
       this.formService.registerDetail(formData).subscribe({
         next: (response) => {
+          this.isLoading = false;
+          this.showSuccessPopup = true
           if(!Number.isNaN(this.id)){
             this.router.navigate(['admin'])
           }else {
-            this.router.navigate([''])
+            // this.router.navigate([''])
           }
         },
         error: (error) => {
@@ -136,45 +143,51 @@ export class FormViewerComponent implements OnInit {
   onFileSelected(event: any): void {
     const file = event.target.files[0]
     if(file){
+
     // const input = event.target as HTMLInputElement;
   // if (input.files && input.files.length > 0) {
     // const file = input.files[0];
     if (file.type.startsWith('image/')) {
-     this.photo = file
-      this.photoError = null;
-      this.photoExist = true;
-      this.form.get('photo')?.setErrors(null); // Clear errors
+      const reader  = new FileReader()
+
+      reader.onload = (e: any)=> {
+        const img = e.target.result
+         // Compress the image before uploading (set quality and dimensions)
+         this.imageCompress.compressFile(img, -1, 50, 50).then((compressedImage) => {
+          // Convert compressed image back to a blob
+          const blob = this.dataURLToBlob(compressedImage);
+
+          this.photo = new File([blob], file.name, { type: file.type });
+          this.photoError = null;
+          this.photoExist = true;
+          this.form.get('photo')?.setErrors(null); // Clear errors
+         })
+      }
+   
+      reader.readAsDataURL(file);
     } else {
       this.photoError = 'Please select a valid image file.';
       this.photoExist = false;
     }
   }
   }
-  videoElement: any;
-  canvasElement: any;
-  context: any;
-  // startCamera() {
-  //   this.videoElement = document.querySelector('video');
-  //   this.canvasElement = document.querySelector('canvas');
-  //   this.context = this.canvasElement.getContext('2d');
 
-  //   // Access the camera using WebRTC
-  //   navigator.mediaDevices.getUserMedia({ video: true })
-  //     .then((stream) => {
-  //       this.videoElement.srcObject = stream;
-  //     })
-  //     .catch((err) => {
-  //       console.error('Error accessing the camera: ', err);
-  //     });
-  // }
+  dataURLToBlob(dataUrl: string): Blob {
+    const byteString = atob(dataUrl.split(',')[1]);
+    const mimeString = dataUrl.split(',')[0].split(':')[1].split(';')[0];
 
-  // takePhoto() {
-  //   // Capture the current video frame
-  //   this.context.drawImage(this.videoElement, 0, 0, this.canvasElement.width, this.canvasElement.height);
-  //   const dataURL = this.canvasElement.toDataURL('image/png');
-  //   console.log('Photo captured:', dataURL);
-  //   // You can now upload or save the captured image (dataURL)
-  // }
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ab], { type: mimeString });
+  }
+  closePopup(): void {
+    this.showSuccessPopup = false;  // Hide the popup
+    this.router.navigate([''])
+  }
 }
 
 
