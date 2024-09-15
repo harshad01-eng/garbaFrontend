@@ -33,7 +33,7 @@ export class FormViewerComponent implements OnInit {
     age: new FormControl<number | null>(null, [Validators.required]), 
     address: new FormControl(''),
     payment: new FormControl(''),
-    photo: new FormControl<File | null>(null)
+    photo: new FormControl<File | null>(null, [Validators.required])
 
   })
 
@@ -143,6 +143,7 @@ export class FormViewerComponent implements OnInit {
      this.photo = file
       this.photoError = null;
       this.photoExist = true;
+      this.form.get('photo')?.setErrors(null); // Clear errors
     } else {
       this.photoError = 'Please select a valid image file.';
       this.photoExist = false;

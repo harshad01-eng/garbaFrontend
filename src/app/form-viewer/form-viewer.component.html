@@ -104,12 +104,18 @@
           </div>
     </div>
     </div>
-    <div class="form-group col-md-6">
-        <!-- <video id="video" autoplay></video>
-<button (click)="takePhoto()">Capture Photo</button>
-<canvas id="canvas"></canvas> -->
+    <div *ngIf="isAdmin" class="form-group col-md-6">
         <label for="photo">Capture Photo</label>
-        <input   type="file" id="photo"  class="form-control"  accept="image/*" capture="user" (change)="onFileSelected($event)">
+        <input  [class.is-invalid]="photoError !== null" type="file" id="photo"  class="form-control"  accept="image/*" capture="user" (change)="onFileSelected($event)">
+        <!-- <div *ngIf="form.get('photo')?.invalid && form.get('photo')?.touched" class="text-danger">
+            photo is required.
+          </div> -->
+          <div *ngIf="photoExist">photo uploaded</div>
+        <div *ngIf="photoError" class="text-danger">{{photoError}}</div>
+    </div>
+    <div *ngIf="!isAdmin" class="form-group col-md-6">
+        <label for="photo">Capture Photo</label>
+        <input  [class.is-invalid]="photoError !== null" type="file" id="photo"  class="form-control"  accept="image/*"  (change)="onFileSelected($event)">
         <!-- <div *ngIf="form.get('photo')?.invalid && form.get('photo')?.touched" class="text-danger">
             photo is required.
           </div> -->
@@ -117,7 +123,10 @@
         <div *ngIf="photoError" class="text-danger">{{photoError}}</div>
     </div>
     <div *ngIf="showError" class="text-danger">{{errorMessage}}</div>
-    <div *ngIf="!isAdmin">Note: After submitting the form, you will need to pay ₹700 offline.</div>
+    <div *ngIf="!isAdmin">Note: After submitting the form, you will need to pay ₹700. <br> 
+        <strong>PhonePe:</strong> 9860775149 <strong> Google pay:</strong> 8087075149 <br>
+        <strong>UPI ID:</strong> 9860775149&#64;ybl
+    </div>
        
         
    
