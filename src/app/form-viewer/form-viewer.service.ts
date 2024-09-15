@@ -11,7 +11,7 @@ import { catchError, map, Observable, throwError } from "rxjs";
 
 export class FormService {
 
-    private apiUrl = 'http://localhost:8080/api';
+    private apiUrl = 'https://udaangarba.com/api';
 
     constructor(private http : HttpClient){}
 
