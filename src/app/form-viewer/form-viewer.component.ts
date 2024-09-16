@@ -71,10 +71,10 @@ export class FormViewerComponent implements OnInit {
             address: registDto.address,
             payment: registDto.payment,
           });
-          if(registDto.photo){
+          // if(registDto.photo ===){
             this.photoExist = true;
             this.form.get('photo')?.setErrors(null)
-          }
+          // }
           
 
          

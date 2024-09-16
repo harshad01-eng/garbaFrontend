@@ -18,6 +18,7 @@ export class FormDetailComponent implements OnInit{
   errorMessage: string | null = null;
   id:number | null = null
   public showDetail:boolean=false;
+  public isLoading:boolean=false;
 
   form= new FormGroup({
     mobileNo: new FormControl('',
@@ -86,6 +87,7 @@ export class FormDetailComponent implements OnInit{
 
     getIdCard(){
       if(this.userDetails.length > 0){
+        this.isLoading = true
         this.formService.downloadPdfById(this.userDetails[0].id).subscribe(res => {
            const url = window.URL.createObjectURL(res);
            const link = document.createElement('a');
@@ -93,6 +95,7 @@ export class FormDetailComponent implements OnInit{
            link.download = 'UDAAN I-CARD.pdf';
            link.click()
            window.URL.revokeObjectURL(url);
+           this.isLoading = false
          }, error => {
            console.error('Error downloading the PDF:', error);
          });

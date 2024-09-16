@@ -25,13 +25,7 @@
     position: absolute;
   }
 
-  @media (max-width:768px) {
-    .container {
-      // background-color: aliceblue;
-      max-height: 200%;
-      position: relative;
-    }
-  }
+ 
 
   .btn-primary:hover{
     filter: brightness(0.6);
@@ -64,6 +58,8 @@
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px; /* Default width */
+  width: 100%; /* Ensure it takes up full width but maxes out at 400px */
 }
 
 .success-popup button {
@@ -74,6 +70,17 @@
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 5px;
+}
+
+@media (max-width:768px) {
+  .container {
+    // background-color: aliceblue;
+    max-height: 200%;
+    position: relative;
+  }
+  .success-popup {
+    max-width: 80%;
+  }
 }
 
   

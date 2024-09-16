@@ -58,7 +58,7 @@ export class DataGridComponent implements OnInit {
     { field: "lastName", flex:1,floatingFilter:true, filter:true  },
     { field: "mobileNo",flex:1,floatingFilter:true, filter:true  },
     { field: "age",flex:1  },
-    { field: "gender",flex:1  },
+    { field: "gender",flex:1, headerName:"Category",floatingFilter:true, filter:true },
     { field: "batchTime",flex:1 },
     { field: "payment",flex:1, cellStyle: (params)=> {
       if(params.value === 'paid'){
