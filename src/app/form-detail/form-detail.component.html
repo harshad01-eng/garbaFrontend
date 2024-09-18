@@ -60,8 +60,11 @@
         </div>
         <div class="row" style="padding-left: 10%;">
           <div class="col-5"><strong>Status</strong></div>
-          <div *ngIf="userDetails.payment === 'paid'" class="col-7"><button type="button" class="status-button active">Active</button></div>
-          <div *ngIf="!(userDetails.payment === 'paid')" class="col-7"><button class="status-button pending">Disable</button> <div class="text-danger">please pay fees at admin</div></div>
+          <div *ngIf="userDetails.payment === 'solo'" class="col-7"><button type="button" class="status-button solo">Active</button></div>
+          <div *ngIf="userDetails.payment === 'group'" class="col-7"><button type="button" class="status-button group">Active</button></div>
+          <div *ngIf="userDetails.payment === 'kids'" class="col-7"><button type="button" class="status-button kids">Active</button></div>
+          <div *ngIf="!(userDetails.payment === 'solo' || userDetails.payment === 'group' || userDetails.payment === 'kids')" class="col-7">
+            <button class="status-button pending">Disable</button> <div class="text-danger">please pay fees at admin</div></div>
         </div>
         <div *ngIf="isLoading" class="loader">
           Loading...

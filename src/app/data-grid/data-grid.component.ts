@@ -61,8 +61,12 @@ export class DataGridComponent implements OnInit {
     { field: "gender",flex:1, headerName:"Category",floatingFilter:true, filter:true },
     { field: "batchTime",flex:1 },
     { field: "payment",flex:1, cellStyle: (params)=> {
-      if(params.value === 'paid'){
-        return {backgroundColor: '#B2FF66', color: 'white'}
+      if(params.value === 'solo'){
+        return {backgroundColor: '#00CC00', color: 'black'}
+      }else if(params.value === 'group'){
+        return {backgroundColor: '#FFFF00', color: 'black'}
+      }else if(params.value === 'kids'){
+        return {backgroundColor: '#0000FF', color: 'white'}
       }
       return {backgroundColor: '#FCBCAF', color: 'white'}; 
     }},

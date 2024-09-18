@@ -81,8 +81,17 @@
   .status-button.pending {
     background-color: #e90000;
   }
-  .status-button.active {
+  .status-button.solo {
     background-color: #71ec38;
+  }
+
+  .status-button.group {
+    background-color: #FFFF00;
+    color: #000000d8;
+  }
+
+  .status-button.kids {
+    background-color: #0000FF;
   }
 
   .detail-button:disabled{
