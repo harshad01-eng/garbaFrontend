@@ -99,13 +99,10 @@
         <label for="payment">Select Payment</label>
         <select style="width: 50%;" [class.is-invalid]="form.get('payment')?.invalid && form.get('payment')?.touched" id="payment" class="form-select" formControlName="payment">
             <option value="" disabled selected>Select payment</option>
-            <option value="100">100</option>
-            <option value="200">200</option>
-            <option value="300">300</option>
-            <option value="400">400</option>
-            <option value="kids">KIDS</option>
-            <option value="group">GROUP</option>
-            <option value="solo">SOLO</option>
+            <option value="none" style="background-color: #e90000;">NONE</option>
+            <option value="kids" style="background-color: #0000FF;">KIDS</option>
+            <option value="group" style="background-color: #FFFF00;">GROUP</option>
+            <option value="solo" style="background-color: #00CC00;">SOLO</option>
         </select>
         <div *ngIf="form.get('payment')?.invalid && form.get('payment')?.touched" class="text-danger">
             Payment is required.
@@ -113,7 +110,7 @@
     </div>
     </div>
     <div *ngIf="isAdmin" class="form-group col-md-6">
-        <label for="photo">Capture Photo</label>
+        <label for="photo">Upload Photo</label>
         <input  [class.is-invalid]="photoError !== null" type="file" id="photo"  class="form-control"  accept="image/*" capture="user" (change)="onFileSelected($event)">
         <!-- <div *ngIf="form.get('photo')?.invalid && form.get('photo')?.touched" class="text-danger">
             photo is required.

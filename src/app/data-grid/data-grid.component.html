@@ -6,9 +6,20 @@
   <button type="button"   class="detail-button" [disabled]="passWord === ''" (click)="submit()">Submit</button>
 </div>
 <div *ngIf="showGrid" class="grid-card-container">
+ 
     <div class="grid-card" *ngIf="isBrowser || isBrowser">
+      <div style="width: 97%; margin-top: 10px; display: flex; justify-content: flex-start;">
+        <label for="categorySelect" style="margin-right: 10px;">Select Category:</label>
+        <select id="categorySelect" style="width: 10%;" (change)="onCategoryChange($event)">
+          <option value ="" disabled selected>Select Category</option>
+            <option value="girls">Girls</option>
+            <option value="boys">Boys</option>
+            <option value="kids">Kids</option>
+            <option value="ladies">Ladies</option>
+        </select>
+    </div>
         <ag-grid-angular
-        style="width: 97%; height: 90%; margin-top: 5px;"
+        style="width: 97%; height: 85%; margin-top: 5px;"
       class="ag-theme-alpine"
         [rowData]="rowData"
         [columnDefs]="colDefs" 

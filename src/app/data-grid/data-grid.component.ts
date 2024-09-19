@@ -46,7 +46,7 @@ export class DataGridComponent implements OnInit {
   ngOnInit(): void {
     if (typeof localStorage !== 'undefined') {
       if( localStorage.getItem("userRole") !== undefined && localStorage.getItem("userRole") !== null ){
-        this.getData()
+       
   }
   }
 }
@@ -107,7 +107,7 @@ export class DataGridComponent implements OnInit {
   submit() {
     this.formService.login("admin",this.passWord).subscribe(res => {
       localStorage.setItem("userRole","admin")
-      this.getData();
+      // this.getData();
       this.showGrid = true;
     },(error: HttpErrorResponse) =>  {
       this.errorMessage = error.error.message
@@ -116,11 +116,11 @@ export class DataGridComponent implements OnInit {
    
     }
 
-    getData(){
-      this.formService.getAllData().subscribe(res => {
-        this.rowData = res
-      })
-    }
+    // getData(){
+    //   this.formService.getAllData().subscribe(res => {
+    //     this.rowData = res
+    //   })
+    // }
 
     checkPassword(){
       if(this.passWord === ''){
@@ -158,4 +158,15 @@ export class DataGridComponent implements OnInit {
         // Export the workbook to an Excel file
         XLSX.writeFile(workbook, 'UDAAN.xlsx');
       }
+
+      onCategoryChange(event: any): void {
+        const selectedValue = event.target.value;
+        console.log("Selected Category:", selectedValue);
+        this.formService.getAllData(selectedValue).subscribe(res => {
+          this.rowData = res
+        })
+        // You can add logic here to filter the grid data based on the selected category
+      }
+
+
 }

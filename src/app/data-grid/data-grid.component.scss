@@ -14,8 +14,11 @@
     background-color: rgb(250, 237, 237);
     position: relative;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     box-shadow: 0 4px 8px rgba(41, 40, 40, 0.1);  /* Add this line for shadow */
+    
   }   
 
   .bottom-right-button {
