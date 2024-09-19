@@ -37,8 +37,8 @@ export class FormService {
         }));
     }
 
-    getAllData(): Observable<RegistDto[]> {
-        return this.http.get<RegistDto[]>(`${this.apiUrl}/gridData`)
+    getAllData(category:string): Observable<RegistDto[]> {
+        return this.http.get<RegistDto[]>(`${this.apiUrl}/gridData/${category}`)
     }
 
     downloadPdfById(id: number) {
