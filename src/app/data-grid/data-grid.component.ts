@@ -46,7 +46,7 @@ export class DataGridComponent implements OnInit {
   ngOnInit(): void {
     if (typeof localStorage !== 'undefined') {
       if( localStorage.getItem("userRole") !== undefined && localStorage.getItem("userRole") !== null ){
-       
+      this.getData();
   }
   }
 }
@@ -116,11 +116,11 @@ export class DataGridComponent implements OnInit {
    
     }
 
-    // getData(){
-    //   this.formService.getAllData().subscribe(res => {
-    //     this.rowData = res
-    //   })
-    // }
+    getData(){
+      this.formService.getAllData('allData').subscribe(res => {
+        this.rowData = res
+      })
+    }
 
     checkPassword(){
       if(this.passWord === ''){
